@@ -5,6 +5,8 @@ SRCS            = $(shell find . -name '*.go')
 APP_DIR         = github.com/creack/yaml2json
 DOCKER_IMG      = creack/$(NAME)
 
+GIT_TAG         = $(shell git describe --tags)
+
 all             : install
 install         :
 		@hash go || (echo "go binary not found" >&2; exit 1)
@@ -21,9 +23,11 @@ build           : .build
 
 release         : .assets.tar.gz
 		docker build -t '$(DOCKER_IMG):latest' -f Dockerfile.release .
+		docker tag '$(DOCKER_IMG):latest' '$(DOCKER_IMG):$(GIT_TAG)'
 
 push            : release
 		docker push '$(DOCKER_IMG):latest'
+		docker push '$(DOCKER_IMG):$(GIT_TAG)'
 
 test            : .build
 		docker run --rm -it '$(DOCKER_IMG):dev' gometalinter --deadline=2m .
