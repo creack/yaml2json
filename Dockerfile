@@ -14,4 +14,4 @@ WORKDIR         $GOPATH/src/$APP_DIR
 
 ADD             .          $GOPATH/src/$APP_DIR
 
-RUN             go install -ldflags -d
+RUN             go install -ldflags '-d -w'
