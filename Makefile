@@ -26,7 +26,7 @@ push            : release
 		docker push '$(DOCKER_IMG):latest'
 
 test            : .build
-		docker run --rm -it '$(DOCKER_IMG):dev' gometalinter .
+		docker run --rm -it '$(DOCKER_IMG):dev' gometalinter --deadline=2m .
 
 clean           :
 		@rm -f .build .assets.tar.gz

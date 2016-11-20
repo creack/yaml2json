@@ -31,5 +31,5 @@ func main() {
 		fmt.Printf("err: %v\n", err)
 		return
 	}
-	_, _ = os.Stdout.Write(out)
+	fmt.Fprintf(os.Stdout, "%s\n", out)
 }
