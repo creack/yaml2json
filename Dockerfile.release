@@ -1,0 +1,3 @@
+FROM            scratch
+ADD             .assets.tar.gz /
+ENTRYPOINT      ["/yaml2json"]
